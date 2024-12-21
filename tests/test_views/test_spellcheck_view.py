@@ -2,12 +2,13 @@ import builtins
 import unittest
 from unittest.mock import patch
 
+from app.models.spellcheck_model import SpellcheckModel
 from app.views.spellcheck_view import SpellcheckView
-
 
 class TestSpellcheckView(unittest.TestCase):
 
     def setUp(self):
+        model = SpellcheckModel("","","","")
         self.spellcheck_view = SpellcheckView()
 
     #given
@@ -32,8 +33,7 @@ class TestSpellcheckView(unittest.TestCase):
         # when
         results = self.spellcheck_view.get_user_input()
         # then
-        self.assertEqual(results, ('C:\\Users\\user\\dictionary.txt', 'C:\\Users\\user\\report.txt', '1', ''),
-                         "They're not equal")
+        self.assertEqual(results, ('C:\\Users\\user\\dictionary.txt', 'C:\\Users\\user\\report.txt', '1', ''), "They're not equal")
 
     if __name__ == '__main__':
         unittest.main()

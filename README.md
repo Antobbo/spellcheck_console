@@ -10,6 +10,5 @@ TODO: The app\samples\report\report_sample.txt file contains a sample report.
 
 ## Usage
 
-If the dictionary file and the file path to store the report aren't provided, the default are used, respectively:
-`app\samples\dictionary\dictionary.txt`
-`app\sample\dictionary\reports\report_dd_mm_yyyy_hh_mm_ss.txt`
+A valid dictionary file and the file path to store the report should be provided.
+
