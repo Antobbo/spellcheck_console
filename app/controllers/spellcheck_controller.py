@@ -10,9 +10,11 @@ class SpellcheckController:
         #todo: to finish with other errors
         errors = []
         if dictionary_file == "":
-            errors.append(self.VALUE_CANNOT_BE_EMPTY_ERROR_MESSAGE.format(element = "Dictionary File"))
+            errors.append(self.VALUE_CANNOT_BE_EMPTY_ERROR_MESSAGE.format(element = self.spellcheck_model.DICTIONARY_FILE_STRING))
         if report_file == "":
-            errors.append(self.VALUE_CANNOT_BE_EMPTY_ERROR_MESSAGE.format(element="Report File"))
+            errors.append(self.VALUE_CANNOT_BE_EMPTY_ERROR_MESSAGE.format(element=self.spellcheck_model.REPORT_FILE_STRING))
+        if scan_mode == "":
+            errors.append(self.VALUE_CANNOT_BE_EMPTY_ERROR_MESSAGE.format(element=self.spellcheck_model.SCAN_MODE_STRING))
 
         return errors
 

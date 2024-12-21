@@ -8,14 +8,12 @@ from app.views.spellcheck_view import SpellcheckView
 
 class TestSpellCheckController(unittest.TestCase):
 
-
-
     def setUp(self):
         model = SpellcheckModel("", "", "", "")
         view = SpellcheckView()
         self.controller = SpellcheckController(view, model)
 
-    def test_validate_inputs_has_no_errors(self):
+    def test_should_validate_inputs_have_no_errors(self):
         dictionary_file = "C:\\Users\\Documents\\python\\Spellcheck_various\\dictionary.txt"
         report_file = "C:\\Users\\Documents\\python\\Spellcheck_various"
         scan_mode = "1"
@@ -23,7 +21,7 @@ class TestSpellCheckController(unittest.TestCase):
         errors = self.controller.validate_inputs(dictionary_file, report_file, scan_mode, file_types)
         self.assertTrue(len(errors) == 0)
 
-    def test_validate_inputs_has_one_error_dictionary_file(self):
+    def test_should_validate_inputs_have_one_empty_error_dictionary_file(self):
         dictionary_file = ""
         report_file = "C:\\Users\\Documents\\python\\Spellcheck_various"
         scan_mode = "1"
@@ -32,7 +30,7 @@ class TestSpellCheckController(unittest.TestCase):
         self.assertTrue(len(errors) == 1)
         self.assertEqual(errors[0].__str__(), "The value of Dictionary File cannot be empty.")
 
-    def test_validate_inputs_has_one_error_report_file(self):
+    def test_should_validate_inputs_have_one_empty_error(self):
         dictionary_file = "C:\\Users\\Documents\\python\\Spellcheck_various\\dictionary.txt"
         report_file = ""
         scan_mode = "1"
@@ -41,7 +39,7 @@ class TestSpellCheckController(unittest.TestCase):
         self.assertTrue(len(errors) == 1)
         self.assertEqual(errors[0].__str__(), "The value of Report File cannot be empty.")
 
-    def test_validate_inputs_has_two_errors_dictionary_file_and_report_file(self):
+    def test_should_validate_inputs_have_two_empty_errors(self):
         dictionary_file = ""
         report_file = ""
         scan_mode = "1"
@@ -50,3 +48,14 @@ class TestSpellCheckController(unittest.TestCase):
         self.assertTrue(len(errors) == 2)
         self.assertEqual(errors[0].__str__(), "The value of Dictionary File cannot be empty.")
         self.assertEqual(errors[1].__str__(), "The value of Report File cannot be empty.")
+
+    def test_should_validate_inputs_have_three_empty_errors(self):
+        dictionary_file = ""
+        report_file = ""
+        scan_mode = ""
+        file_types = ""
+        errors = self.controller.validate_inputs(dictionary_file, report_file, scan_mode, file_types)
+        self.assertTrue(len(errors) == 3)
+        self.assertEqual(errors[0].__str__(), "The value of Dictionary File cannot be empty.")
+        self.assertEqual(errors[1].__str__(), "The value of Report File cannot be empty.")
+        self.assertEqual(errors[2].__str__(), "The value of Scan Mode cannot be empty.")
