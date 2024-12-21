@@ -21,3 +21,9 @@ class SpellcheckModel:
 
     def get_file_extensions(self):
         return self.file_extensions
+
+    def __str__(self):
+        return (f"Report file: {self.report_file_path}.\n"
+                f"Dictionary file: {self.dictionary_file_path}.\n"
+                f"Scan mode: {self.scan_mode}.\n"
+                f"File extensions: {self.file_extensions}.\n")
