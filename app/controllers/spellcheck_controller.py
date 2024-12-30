@@ -1,8 +1,12 @@
+import os.path
+
+
 class SpellcheckController:
 
     VALUE_CANNOT_BE_EMPTY_ERROR_MESSAGE = "The value of {element} cannot be empty."
     SCAN_MODE_WRONG_RANGE_ERROR_MESSAGE = "The range of the values should be between {first_value} and {last_value}."
     VALUE_INVALID_TYPE_MUST_BE_NUMBER = "The value must be a number."
+    DICTIONARY_FILE_DOES_NOT_EXIST = "A dictionary text file must exist."
 
     def __init__(self, spellcheck_view, spellcheck_model):
         self.spellcheck_view = spellcheck_view
@@ -25,8 +29,11 @@ class SpellcheckController:
                        last_value=len(self.spellcheck_model.SCAN_MODE)))
             except ValueError:
                 errors.append(self.VALUE_INVALID_TYPE_MUST_BE_NUMBER)
+        if len(dictionary_file) != 0 and not os.path.exists(dictionary_file):
+            errors.append(self.DICTIONARY_FILE_DOES_NOT_EXIST)
         return errors
 
+    #todo: validate file extensions, file paths
     def update_spellcheck_model(self, dictionary_file, report_file, scan_mode, file_types):
         #todo update the model
         pass
