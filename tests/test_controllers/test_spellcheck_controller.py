@@ -110,7 +110,7 @@ class TestSpellCheckController(unittest.TestCase):
         dictionary_file = "C:\\Users\\Documents\\python\\Spellcheck_various\\dictionary.txt"
         report_file = "C:\\Users\\Documents\\python\\Spellcheck_various"
         scan_mode = "1"
-        file_types = "doc, pdf"
+        file_types = "doc,pdf"
         errors = self.controller.validate_inputs(dictionary_file, report_file, scan_mode, file_types)
         self.assertTrue(len(errors) == 1)
         self.assertEqual(errors[0].__str__(), self.controller.DICTIONARY_FILE_DOES_NOT_EXIST)
@@ -119,9 +119,29 @@ class TestSpellCheckController(unittest.TestCase):
         dictionary_file = self.get_file("dictionary.txt")
         report_file = "C:\\Users\\Documents\\python\\Spellcheck_various"
         scan_mode = "1"
-        file_types = "doc, pdf"
+        file_types = "doc,pdf"
+        #todo: the above needs to work with spaces like "doc, pdf"
         errors = self.controller.validate_inputs(dictionary_file, report_file, scan_mode, file_types)
         self.assertTrue(len(errors) == 0)
+        self.delete_file(dictionary_file)
+
+    def test_should_file_extensions_entered_not_generate_error(self):
+        dictionary_file = self.get_file("dictionary.txt")
+        report_file = "C:\\Users\\Documents\\python\\Spellcheck_various"
+        scan_mode = "1"
+        file_types = "doc,pdf"
+        errors = self.controller.validate_inputs(dictionary_file, report_file, scan_mode, file_types)
+        self.assertTrue(len(errors) == 0)
+        self.delete_file(dictionary_file)
+
+    def test_should_file_extensions_entered_generate_error(self):
+        dictionary_file = self.get_file("dictionary.txt")
+        report_file = "C:\\Users\\Documents\\python\\Spellcheck_various"
+        scan_mode = "1"
+        file_types = "doc,xls,pdf,php"
+        #todo: this needs to work with spaces like "doc, xls, pdf, php"
+        errors = self.controller.validate_inputs(dictionary_file, report_file, scan_mode, file_types)
+        self.assertTrue(len(errors) == 1)
         self.delete_file(dictionary_file)
 
     @staticmethod

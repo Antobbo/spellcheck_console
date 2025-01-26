@@ -4,6 +4,10 @@ class SpellcheckModel:
         2: "webpages",
     }
 
+    ALL_ALLOWED_SCANNABLE_FILE_EXTENSIONS = {
+        "txt", "pdf", "doc", "docx", "xls", "xlsx", "md", "adoc", "eml", "xml", "csv"
+    }
+
     SCAN_MODE_STRING = "Scan Mode"
     REPORT_FILE_STRING = "Report File"
     DICTIONARY_FILE_STRING = "Dictionary File"
