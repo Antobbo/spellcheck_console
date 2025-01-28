@@ -4,6 +4,7 @@ import unittest
 from contextlib import nullcontext
 
 from app.controllers.spellcheck_controller import SpellcheckController
+from app.models import spellcheck_model
 from app.models.spellcheck_model import SpellcheckModel
 from app.views.spellcheck_view import SpellcheckView
 
@@ -120,7 +121,6 @@ class TestSpellCheckController(unittest.TestCase):
         report_file = "C:\\Users\\Documents\\python\\Spellcheck_various"
         scan_mode = "1"
         file_types = "doc,pdf"
-        #todo: the above needs to work with spaces like "doc, pdf"
         errors = self.controller.validate_inputs(dictionary_file, report_file, scan_mode, file_types)
         self.assertTrue(len(errors) == 0)
         self.delete_file(dictionary_file)
@@ -134,14 +134,15 @@ class TestSpellCheckController(unittest.TestCase):
         self.assertTrue(len(errors) == 0)
         self.delete_file(dictionary_file)
 
-    def test_should_file_extensions_entered_generate_error(self):
+    def test_should_file_extensions_entered_be_in_model(self):
         dictionary_file = self.get_file("dictionary.txt")
         report_file = "C:\\Users\\Documents\\python\\Spellcheck_various"
         scan_mode = "1"
         file_types = "doc,xls,pdf,php"
-        #todo: this needs to work with spaces like "doc, xls, pdf, php"
         errors = self.controller.validate_inputs(dictionary_file, report_file, scan_mode, file_types)
-        self.assertTrue(len(errors) == 1)
+        self.assertTrue(len(errors) == 0)
+        file_ext = self.controller.spellcheck_model.ALL_ALLOWED_SCANNABLE_FILE_EXTENSIONS
+        self.assertEqual(len(file_ext),4)
         self.delete_file(dictionary_file)
 
     @staticmethod

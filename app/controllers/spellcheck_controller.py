@@ -28,11 +28,7 @@ class SpellcheckController:
                    errors.append(self.SCAN_MODE_WRONG_RANGE_ERROR_MESSAGE.format(first_value=next(iter(self.spellcheck_model.SCAN_MODE)), last_value=len(self.spellcheck_model.SCAN_MODE)))
                else:
                    if file_types != "":
-                        file_types_entered = file_types.split(",")
-                        for file_type in file_types_entered:
-                            #todo: this needs to work with spaces too like "doc, pdf"
-                            if file_type not in self.spellcheck_model.ALL_ALLOWED_SCANNABLE_FILE_EXTENSIONS:
-                                errors.append(self.FILE_EXTENSION_NOT_ALLOWED.format(file_ext=file_type))
+                       self.update_file_extensions_on_model(file_types)
             except ValueError:
                 errors.append(self.VALUE_INVALID_TYPE_MUST_BE_NUMBER)
         if len(dictionary_file) != 0 and not os.path.exists(dictionary_file):
@@ -41,6 +37,11 @@ class SpellcheckController:
 
     #todo: error messages should be passed back to the view for displaying
 
+    def update_file_extensions_on_model(self, file_types):
+        self.spellcheck_model.ALL_ALLOWED_SCANNABLE_FILE_EXTENSIONS.clear()
+        file_types_entered = file_types.split(",")
+        for file_type in file_types_entered:
+            self.spellcheck_model.ALL_ALLOWED_SCANNABLE_FILE_EXTENSIONS.add(file_type)
 
     def update_spellcheck_model(self, dictionary_file, report_file, scan_mode, file_types):
         #todo update the model
