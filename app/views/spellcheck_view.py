@@ -24,3 +24,8 @@ class SpellcheckView:
     def display_generated_report_file_path(self):
         file_location = "dummy_location" #TODO: get the controller to get it from controller
         return self.FILE_LOCATION_MESSAGE + file_location
+
+    def display_errors(self, errors):
+        print("\nThe following errors occurred:")
+        for error in errors:
+            print(f"- {error}")
