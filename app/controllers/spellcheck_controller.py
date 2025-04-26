@@ -33,9 +33,10 @@ class SpellcheckController:
                 errors.append(self.VALUE_INVALID_TYPE_MUST_BE_NUMBER)
         if len(dictionary_file) != 0 and not os.path.exists(dictionary_file):
             errors.append(self.DICTIONARY_FILE_DOES_NOT_EXIST)
+        # todo: possibly where to pass error messages back to the view for displaying if any
         return errors
 
-    #todo: error messages should be passed back to the view for displaying
+
 
     def update_file_extensions_on_model(self, file_types):
         self.spellcheck_model.ALL_ALLOWED_SCANNABLE_FILE_EXTENSIONS.clear()

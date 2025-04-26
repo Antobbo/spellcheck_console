@@ -53,6 +53,7 @@ class TestSpellcheckView(unittest.TestCase):
         self.spellcheck_view.display_errors(self.get_errors())
         self.assertEqual(captured_output.getvalue(), expected_output)
 
+
     def get_errors(self):
         errors = [
             SpellcheckController.VALUE_CANNOT_BE_EMPTY_ERROR_MESSAGE.format(element=SpellcheckModel.DICTIONARY_FILE_STRING),
