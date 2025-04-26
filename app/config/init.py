@@ -9,7 +9,8 @@ def main():
 
     model = SpellcheckModel(None, None, None, None)
     controller = SpellcheckController(view, model)
-
+    errors = controller.validate_inputs(user_input[0], user_input[1], user_input[2], user_input[3])
+    #if no error go ahear, otherwise pass them on onto the view
     print(user_input)
 
 
